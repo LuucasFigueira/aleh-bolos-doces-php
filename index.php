@@ -29,6 +29,7 @@
         </div>
     </div>
     <script src="js/galeria.js"></script> <!-- Link JS, importando para funcionar -->
+    <script src="js/modal.js"></script>
 
 </body>
 

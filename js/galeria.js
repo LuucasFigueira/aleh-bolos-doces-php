@@ -1,3 +1,5 @@
+/* galeria fotos */
+
 const imagens = [
     "img-galeria/foto1.png",
     "img-galeria/foto2.png",
