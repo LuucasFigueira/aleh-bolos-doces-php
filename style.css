@@ -1,0 +1,376 @@
+/* Deixei comentarios nos codigos que esqueço com frequência ou confundo (quase todos kk) */
+
+body {
+    background-image: url('img-logo/fundo.png');
+    background-size: cover;
+    /* Faz a imagem cobrir toda a área. */
+    background-position: center;
+    /* Deixa a imagem centralizada */
+    background-repeat: no-repeat;
+    /* Não deixa a imagem se repetir */
+    background-attachment: fixed;
+    /* Mantém a imagem fixa */
+
+}
+
+/* Containers */
+
+.login {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+}
+
+.modal {
+    display: none;
+    /* Oculta o modal por padrão */
+    position: fixed;
+    /* Fixa o modal na tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo escuro com transparência */
+    justify-content: center;
+    /* Centraliza o conteúdo horizontalmente */
+    align-items: center;
+    /* Centraliza o conteúdo verticalmente */
+
+}
+
+.modalTela {
+    display: flex;
+    flex-direction: column;
+    /* Faz com que os elementos fiquem em coluna */
+    justify-content: center;
+    /* Centraliza o conteúdo horizontalmente */
+    align-items: center;
+    /* Centraliza o conteúdo verticalmente */
+    height: auto;
+
+    background-color: #fff;
+    /* Fundo branco */
+    padding: 20px;
+    border-radius: 5px;
+    /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra */
+
+    text-align: center;
+    /* Centraliza o texto */
+
+}
+
+.modalTela .close {
+    align-self: flex-end;
+    /* Alinha o botão de fechar à direita */
+
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    /* Faz com que os itens do menu fiquem espaçados */
+    align-items: center;
+    /* Faz com que os itens do menu fiquem centralizados */
+
+}
+
+.menu ul {
+    display: flex;
+    gap: 40px;
+    /* Espaçamento entre os itens do menu */
+    list-style: none;
+    /* Remove os pontinhos da lista */
+    padding: 0;
+    /* Remove o padding da lista */
+
+}
+
+.menu ul li a {
+    text-decoration: none;
+
+}
+
+.cadastro {
+    display: flex;
+    /* Oculta o modal por padrão */
+    justify-content: center;
+    /* Centraliza o conteúdo horizontalmente */
+    flex-direction: column;
+    /* Faz com que os elementos fiquem em coluna */
+    align-items: center;
+    /* Centraliza o conteúdo verticalmente */
+
+}
+
+.cadastro form button {
+    /* Faz com que o botão fique centralizado */
+    display: block;
+    margin: 0 auto;
+
+}
+
+.cadastro form input {
+    /* Faz com que os inputs fiquem centralizados */
+    width: 100%;
+    box-sizing: border-box;
+    /* Faz com que o tamanho do input seja relativo ao tamanho do container */
+    padding: 1px;
+    /* Faz com que o padding seja relativo ao tamanho do container */
+    margin-bottom: 5px;
+    /* Faz com que o margin seja relativo ao tamanho do container */
+
+}
+
+.cadastroCompleto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.cadastroCompleto img {
+    width: 100px;
+    height: 100px;
+}
+
+/* Botões */
+
+.login #bntLogin {
+    background: none;
+    /* Remove o fundo do botão */
+    border: none;
+    /* Remove a borda do botão */
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.login #bntLogin img {
+    display: block;
+    height: 50px;
+    /* Define a altura da imagem */
+    width: 50px;
+    /* Define a largura da imagem */
+}
+
+.encomenda {
+    display: flex;
+    flex-direction: column;
+    /* Faz com que os elementos fiquem em coluna */
+    margin-top: 20px;
+    align-items: center;
+
+}
+
+.encomenda form button {
+    /* Faz com que o botão fique centralizado */
+    display: block;
+    margin: 0 auto;
+
+}
+
+.encomenda form input {
+    /* Faz com que os inputs fiquem centralizados */
+    width: 100%;
+    box-sizing: border-box;
+    /* Faz com que o tamanho do input seja relativo ao tamanho do container */
+    padding: 1px;
+    /* Faz com que o padding seja relativo ao tamanho do container */
+    margin-bottom: 5px;
+    /* Faz com que o margin seja relativo ao tamanho do container */
+
+}
+
+.encomenda form textarea {
+    /* Faz com que os inputs fiquem centralizados */
+    width: 100%;
+    height: 100px;
+    /* Define a altura do textarea */
+
+}
+
+.produtos {
+    display: flex;
+    padding-top: 10px;
+    padding-right: 5px;
+    
+}
+
+.contato {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 70px;
+    gap: 50px;
+    /* Espaçamento entre os elementos do contato */
+    flex-wrap: wrap;
+    overflow: hidden;
+
+}
+
+.contato div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* Faz com que os elementos fiquem em coluna */
+    gap: 10px;
+    /* Espaçamento entre os elementos do contato */
+
+}
+
+.contato a {
+    text-decoration: none;
+    /* Remove a decoração do link */
+    color: inherit;
+    /* Mantém a cor do texto */
+    font-size: 25px;
+    /* Define o tamanho da fonte */
+
+}
+
+.contato #whatsapp-button,
+#instagram-button {
+    background: none;
+    /* Remove o fundo do botão */
+    border: none;
+    /* Remove a borda do botão */
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.contato #whatsapp-button img,
+.contato #instagram-button img {
+    display: flex;
+    margin: 0 auto;
+    /* Centraliza a imagem */
+    max-width: 70%;
+    height: auto;
+    /* Define a altura da imagem */
+    width: 200px;
+    /* Define a largura da imagem */
+
+}
+
+/* imagens */
+.trabalhos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.galeria {
+    display: flex;
+    max-width: 90%;
+    width: 1000px;
+    height: 450px;
+    background-color: #f0f0f0;
+    align-items: center;
+    border-radius: 100px;
+    justify-content: center;
+    gap: 10%;
+    flex-wrap: wrap;
+}
+
+.galeria img {
+    width: 450px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 50px;
+    box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+    .galeria {
+        max-width: 90%;
+        width: 1500px;
+        height: 350px;
+    }
+
+    .galeria img {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+.seta {
+    background: none;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.seta:hover {
+    transform: scale(1.2);
+}
+
+.imagem-full {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.9);
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+}
+
+.imagem-full img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.logo {
+    display: flex;
+    height: 250px;
+
+    background-image: url('img-logo/logo-aleh-R.png');
+    background-position: center;
+    /* Deixa a imagem centralizada */
+    background-size: contain;
+    /* Faz a imagem caber dentro do div caso ela seja maior */
+    background-repeat: no-repeat;
+    /* Não deixa a imagem se repetir */
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+    /* Filter serve para adicionar sombra à imagem e acompanhar o contorno e não o retângulo do div */
+}
+/* Cartão branco - usado em páginas de autenticação (confirmar código, redefinir senha, etc)
+   para o texto não ficar em cima da imagem de fundo do body, difícil de ler */
+.cartao {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-sizing: border-box;
+}
+.cartao input {
+    margin-top: 10px;
+    max-width: 50%;
+    text-align: center;
+}
+
+.linkSecundario {
+    text-align: right;
+    margin: 0 0 10px 0;
+    font-size: 14px;
+}
