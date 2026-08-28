@@ -40,7 +40,7 @@ $sucessoSenha = isset($_GET['sucesso']) && $_GET['sucesso'] === 'senha';
             <button class="close" id="fecharModal" onclick="fecharModal()">&times;</button>
 
             <h2>Olá, Bem-vindo</h2>
-
+            <br>
             <a href="<?php echo $base; ?>pages/usuario/minhaConta.php"><button type="button">Minha conta</button></a>
             <br>
 

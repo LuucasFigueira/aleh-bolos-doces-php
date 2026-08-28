@@ -41,9 +41,9 @@ $cliente = $resultado->fetch_assoc();
     <div class="cadastro">
 
         <div class="cartao">
-
-            <h1>Minha conta</h1>
-
+            <div class="cartaoTitulo"><h1>Minha conta</h1></div>
+            
+            <div class="cartaoInfo">
             <p><strong>Nome:</strong> <?php echo htmlspecialchars($cliente['nome']); ?></p>
             <p><strong>Email:</strong> <?php echo htmlspecialchars($cliente['email']); ?></p>
             <p>
@@ -51,7 +51,7 @@ $cliente = $resultado->fetch_assoc();
                 <?php echo $cliente['email_verificado'] == 1 ? '✅' : '❌'; ?>
             </p>
 
-            <br><br>
+            <br>
 
             <a href="alterarNome.php"><button>Alterar nome</button></a>
             <br><br>
@@ -66,7 +66,7 @@ $cliente = $resultado->fetch_assoc();
                 <input type="hidden" name="csrf_token" value="<?php echo gerarTokenCSRF(); ?>">
                 <button type="submit">Sair</button>
             </form>
-
+            </div>
         </div>
 
     </div>
