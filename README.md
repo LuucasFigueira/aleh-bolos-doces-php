@@ -35,18 +35,22 @@ Projeto desenvolvido como estudo prático de PHP, com foco em fundamentos de bac
     <td align="center"><b>Login</b></td>
     <td align="center"><b>Usuário logado</b></td>
     <td align="center"><b>Minha conta</b></td>
+    <td align="center"><b>pedido</b></td>
     <td align="center"><b>inicio</b></td>
     <td align="center"><b>encomenda</b></td>
     <td align="center"><b>contato</b></td>
+    
 
   </tr>
   <tr>
     <td><img src="img-portfolio/login.png" width="260"></td>
     <td><img src="img-portfolio/logado.png" width="260"></td>
     <td><img src="img-portfolio/minha-conta.png" width="260"></td>
+    <td><img src="img-portfolio/pedido.png" width="260"></td>
     <td><img src="img-portfolio/inicio.png" width="260"></td>
     <td><img src="img-portfolio/encomenda.png" width="260"></td>
     <td><img src="img-portfolio/contato.png" width="260"></td>
+    
   </tr>
 </table>
 

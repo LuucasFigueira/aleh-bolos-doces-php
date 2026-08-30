@@ -177,6 +177,9 @@ try {
 
 } catch (Exception $e) {
 
-    echo "O cadastro foi realizado, mas não foi possível enviar o e-mail.";
+    error_log("Falha ao enviar e-mail de cadastro para $email: " . $e->getMessage());
 
 }
+
+header("Location: ../pages/auth/confirmarEmail.php?email=" . urlencode($email));
+exit;
