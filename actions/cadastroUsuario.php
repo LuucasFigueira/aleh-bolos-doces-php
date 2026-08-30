@@ -30,18 +30,53 @@ elseif (strlen($senha) < 8 ) {
 
 
 /* Verifica se o email já está cadastrado */
-$sql = "SELECT id FROM cliente WHERE email = ?";
-
+$sql = "SELECT id, nome, email_verificado FROM cliente WHERE email = ?";
 $stmt = $conexao->prepare($sql);
 $stmt->bind_param("s", $email);
 $stmt->execute();
-
 $resultado = $stmt->get_result();
-
 
 if ($resultado->num_rows > 0) {
 
-    header("Location: ../pages/auth/cadastro.php?erro=email");
+    $row = $resultado->fetch_assoc();
+
+    /* Gera um código como se fosse um cadastro normal */
+    $codigo = random_int(100000, 999999);
+    $codigoExpira = date('Y-m-d H:i:s', time() + 900);
+
+    $sql = "UPDATE cliente SET codigo_verificacao = ?, codigo_expira = ? WHERE id = ?";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("ssi", $codigo, $codigoExpira, $row['id']);
+    $stmt->execute();
+
+    /* Envia e-mail avisando que já existe conta, com o código pra entrar */
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host = $_ENV['MAIL_HOST'];
+        $mail->SMTPAuth = true;
+        $mail->Username = $_ENV['MAIL_USERNAME'];
+        $mail->Password = $_ENV['MAIL_PASSWORD'];
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = $_ENV['MAIL_PORT'];
+        $mail->setFrom($_ENV['MAIL_USERNAME'], 'Aleh Bolos e Doces');
+        $mail->addAddress($email, $row['nome']);
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Subject = 'Tentativa de cadastro - Aleh Bolos e Doces';
+        $mail->Body = "
+            <h2>Olá, {$row['nome']}!</h2>
+            <p>Alguém tentou se cadastrar usando este e-mail, mas você já tem uma conta.</p>
+            <p>Se foi você, use o código abaixo para entrar:</p>
+            <h1>$codigo</h1>
+            <p>Válido por <strong>15 minutos</strong>.</p>
+            <p>Se não foi você, apenas ignore este e-mail — nenhuma alteração foi feita na sua conta.</p>
+        ";
+        $mail->send();
+    } catch (Exception $e) {}
+
+    /* Mesmo destino de sempre — indistinguível de um cadastro novo */
+    header("Location: ../pages/auth/confirmarEmail.php?email=" . urlencode($email));
     exit;
 }
 
@@ -77,7 +112,7 @@ $stmt->bind_param(
 
 /* Executa o cadastro */
 if (!$stmt->execute()) {
-    die("Erro ao cadastrar: " . $stmt->error);
+    die("Erro ao cadastrar. Tente novamente.");
 }
 
 
@@ -143,7 +178,5 @@ try {
 } catch (Exception $e) {
 
     echo "O cadastro foi realizado, mas não foi possível enviar o e-mail.";
-    echo "<br>";
-    echo "Erro: " . $mail->ErrorInfo;
 
 }

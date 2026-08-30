@@ -14,7 +14,7 @@ $mensagem = '';
 $sucesso = false;
 
 /* Procura o usuário pelo e-mail */
-$sql = "SELECT id, codigo_verificacao, codigo_expira 
+$sql = "SELECT id, nome, codigo_verificacao, codigo_expira, email_verificado 
         FROM cliente 
         WHERE email = ?";
 
@@ -24,47 +24,39 @@ $stmt->execute();
 
 $resultado = $stmt->get_result();
 
-/* Verifica se encontrou o usuário */
 if ($resultado->num_rows === 0) {
 
-    $mensagem = "Usuário não encontrado.";
-
+    $mensagem = "Código inválido ou expirado.";
 } else {
 
     $row = $resultado->fetch_assoc();
 
-    /* Verifica se o código está correto */
-    if ($codigo !== $row['codigo_verificacao']) {
+    /* Código incorreto OU expirado → mesma mensagem, evita vazar qual dos dois é */
+    if ($codigo !== $row['codigo_verificacao'] || strtotime($row['codigo_expira']) < time()) {
 
-        $mensagem = "Código incorreto.";
-
-    } elseif (strtotime($row['codigo_expira']) < time()) {
-        /* Verifica se o código ainda está dentro do prazo */
-
-        $mensagem = "O código expirou. Solicite um novo código.";
-
+        $mensagem = "Código inválido ou expirado.";
     } else {
 
-        /* Confirma o e-mail */
-        $sql = "UPDATE cliente 
-                SET email_verificado = 1,
-                    codigo_verificacao = NULL,
-                    codigo_expira = NULL
-                WHERE id = ?";
+        $jaEstavaVerificado = $row['email_verificado'] == 1;
 
+        $sql = "UPDATE cliente SET email_verificado = 1, codigo_verificacao = NULL, codigo_expira = NULL WHERE id = ?";
         $stmt = $conexao->prepare($sql);
         $stmt->bind_param("i", $row['id']);
 
-        if (!$stmt->execute()) {
-
-            $mensagem = "Erro ao confirmar o e-mail.";
-
-        } else {
-
-            /* Tudo certo */
-            $mensagem = "E-mail confirmado com sucesso!";
-            $sucesso = true;
-
+        if ($stmt->execute()) {
+            if ($jaEstavaVerificado) {
+                /* Era uma tentativa de "cadastro" numa conta que já existia → loga o usuário */
+                session_start();
+                session_regenerate_id(true);
+                $_SESSION['email'] = $email;
+                $_SESSION['nome'] = $row['nome'];
+                $_SESSION['id'] = $row['id'];
+                header("Location: ../../index.php");
+                exit;
+            } else {
+                $mensagem = "E-mail confirmado com sucesso!";
+                $sucesso = true;
+            }
         }
     }
 }
@@ -82,7 +74,8 @@ if ($resultado->num_rows === 0) {
 
 <body>
 
-    <?php  $base = "../../"; include "../../includes/cabecalho.php"; ?>
+    <?php $base = "../../";
+    include "../../includes/cabecalho.php"; ?>
 
     <div class="cadastro">
 
@@ -107,5 +100,4 @@ if ($resultado->num_rows === 0) {
     <script src="../../js/modal.js"></script>
 
 </body>
-
 </html>

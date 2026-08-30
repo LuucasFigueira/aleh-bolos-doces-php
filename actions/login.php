@@ -68,7 +68,7 @@ if ($resultado->num_rows > 0) {
 
 
         if (!$stmt->execute()) {
-            die("Erro ao gerar novo código: " . $stmt->error);
+            die("Erro ao gerar novo código: ");
         }
 
 
@@ -141,7 +141,7 @@ if ($resultado->num_rows > 0) {
 
             echo "Não foi possível enviar o código.";
             echo "<br>";
-            echo "Erro: " . $mail->ErrorInfo;
+            echo "Erro: ";
         }
 
         exit;
@@ -156,9 +156,11 @@ if ($resultado->num_rows > 0) {
 
 
     if (password_verify($senha, $senhaHash)) {
+        session_regenerate_id(true);
 
         $_SESSION['email'] = $email;
         $_SESSION['nome'] = $row['nome'];
+        $_SESSION['id'] = $row['id'];
 
         header("Location: ../index.php");
         exit();

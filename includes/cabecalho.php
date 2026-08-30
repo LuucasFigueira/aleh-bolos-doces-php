@@ -44,7 +44,7 @@ $sucessoSenha = isset($_GET['sucesso']) && $_GET['sucesso'] === 'senha';
             <a href="<?php echo $base; ?>pages/usuario/minhaConta.php"><button type="button">Minha conta</button></a>
             <br>
 
-            <a href="<?php echo $base; ?>pages/usuario/alterarSenha.php"><button type="button">Alterar senha</button></a>
+            <a href="<?php echo $base; ?>pages/usuario/pedidos.php"><button type="button">Meus Pedidos</button></a>
             <br>
 
             <form action="<?php echo $base; ?>actions/logout.php" method="POST">
@@ -72,14 +72,14 @@ $sucessoSenha = isset($_GET['sucesso']) && $_GET['sucesso'] === 'senha';
             <?php if ($erroLogin) : ?>
 
                 <p class="erro" style="color: red;"><strong>
-                    Email ou senha incorretos.
-            </strong></p>
+                        Email ou senha incorretos.
+                    </strong></p>
 
             <?php elseif ($erroNaoVerificado) : ?>
 
                 <p class="erro" style="color: red;"><strong>
-                    E-mail não confirmado.
-            </strong></p>
+                        E-mail não confirmado.
+                    </strong></p>
 
             <?php endif; ?>
 

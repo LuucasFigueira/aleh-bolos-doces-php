@@ -1,3 +1,5 @@
+<?php $base = "../../"; include "../../includes/cabecalho.php"; ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,13 +12,9 @@
 
 <body>
 
-    <?php $base = "../../"; include "../../includes/cabecalho.php"; ?>
-    <?php
-    // $logado e $nomeUsuario já vêm definidos pelo cabecalho.php
-    ?>
-
     <div class="encomenda">
         <h1>Encomenda</h1>
+        <p style= "color: green";><strong>Se não tiver cadastro, finalizamos a encomenda pelo whatsapp. </strong></p><br>
         <form id="formEncomenda" action="../../actions/processarEncomenda.php" method="POST" enctype="multipart/form-data">
 
             <input type="hidden" name="csrf_token" value="<?php echo gerarTokenCSRF(); ?>">
@@ -39,7 +37,8 @@
             <input type="text" id="endereco" name="endereco" required>
             <br>
 
-            <label>Produto: *</label>
+            <label>Selecione o Produto: *</label>
+            <h4>Valor: R$ <span id="valorTotal">0,00</span></h4>
             <div class="produtos">
                 <input type="checkbox" id="produtoBolo" name="produtos[]" value="Bolo" onchange="atualizarCampos()">
                 <label for="produtoBolo">Bolo</label>
@@ -51,7 +50,7 @@
 
             <div id="campoBolo" style="display:none;">
                 <label for="pesoBolo">Peso do bolo (kg) - mínimo 1kg: *</label>
-                <input type="number" id="pesoBolo" name="pesoBolo" min="1" step="0.5">
+                <input type="number" id="pesoBolo" name="pesoBolo" min="1" value="1" step="0.5" oninput="calcularValor()">
                 <br>
 
                 <label for="saborBolo">Sabor/Recheio do bolo: *</label>
@@ -61,7 +60,7 @@
 
             <div id="campoDoces" style="display:none;">
                 <label for="qtdDoces">Quantidade de doces - mínimo 20 unidades: *</label>
-                <input type="number" id="qtdDoces" name="qtdDoces" min="20" step="1">
+                <input type="number" id="qtdDoces" name="qtdDoces" min="20" value="20" step="1" oninput="calcularValor()">
                 <br>
 
                 <label for="saborDoces">Sabor dos doces: *</label>
@@ -80,12 +79,17 @@
             <br>
 
             <p id="mensagemSenha"></p>
-            <button type="submit">Enviar pedido</button>
+            <?php if ($logado) : ?>
+                <button type="submit">Enviar pedido</button>
+            <?php else : ?>
+                <button type="submit">Finalizar pelo WhatsApp</button>
+            <?php endif?>
         </form>
     </div>
 
     <script src="../../js/modal.js"></script>
     <script src="../../js/encomenda.js"></script>
+    <script src="../../js/calculoValor.js"></script>
 
 </body>
 
