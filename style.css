@@ -4,16 +4,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 nav {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Define a família da fonte tipográfica */
 }
 
 nav a {
-    display: inline-block;
-    transition: transform 0.2s ease;
+    display: inline-block; /* Permite aplicar largura, altura e transformações sem quebrar a linha */
+    transition: transform 0.2s ease; /* Cria uma transição suave ao mudar a propriedade indicada */
 }
 
 nav a:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Desloca o elemento no eixo vertical (Y negativo sobe) */
 }
 
 h1,
@@ -24,7 +24,7 @@ h3 {
 
 p {
     font-family: 'Poppins', sans-serif;
-    font-weight: 400;
+    font-weight: 400; /* Define o peso/espessura da fonte (400 = normal, 700 = negrito) */
 }
 
 /* Body */
@@ -43,10 +43,10 @@ body {
 /* Containers */
 
 .login {
-    display: flex;
-    margin: 0;
-    justify-content: center;
-    margin-top: 20px;
+    display: flex; /* Transforma em container flexível para alinhar elementos filhos */
+    margin: 0; /* Define a margem externa ao redor do elemento */
+    justify-content: center; /* Alinha os itens flex no eixo principal (horizontal por padrão) */
+    margin-top: 20px; /* Margem externa superior */
 }
 
 .login img {
@@ -63,49 +63,201 @@ body {
     /* Oculta o modal por padrão */
     position: fixed;
     /* Fixa o modal na tela */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; /* Distância a partir do topo da tela */
+    left: 0; /* Distância a partir do lado esquerdo da tela */
+    width: 100%; /* Define a largura do elemento */
+    height: 100%; /* Define a altura do elemento */
 
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.55);
     /* Fundo escuro com transparência */
+    backdrop-filter: blur(2px); /* Aplica efeito de desfoque/filtro no conteúdo que estiver atrás */
     justify-content: center;
     /* Centraliza o conteúdo horizontalmente */
     align-items: center;
     /* Centraliza o conteúdo verticalmente */
+    z-index: 1000; /* Controla a camada de sobreposição (número maior fica por cima) */
 }
 
 .modalTela {
+    position: relative; /* Serve de ponto de referência para posicionar filhos absolutos */
     display: flex;
     flex-direction: column;
     /* Faz com que os elementos fiquem em coluna */
-    justify-content: center;
-    /* Centraliza o conteúdo horizontalmente */
     align-items: center;
     /* Centraliza o conteúdo verticalmente */
-    height: auto;
 
     background-color: #fff;
     /* Fundo branco */
-    padding: 20px;
-    border-radius: 5px;
+    padding: 40px 32px 32px; /* Espaçamento interno (topo | lados | base) */
+    border-radius: 18px;
     /* Bordas arredondadas */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
     /* Sombra */
 
+    max-width: 360px; /* Largura máxima que o elemento pode atingir */
+    width: 90%;
+    box-sizing: border-box; /* Garante que padding e borda não aumentem o tamanho total definido */
     text-align: center;
     /* Centraliza o texto */
+
+    animation: apareceModal 0.25s ease; /* Aplica a animação criada no @keyframes */
+}
+
+@keyframes apareceModal {
+    from {
+        opacity: 0; /* Controla a transparência total (0 invisível, 1 visível) */
+        transform: translateY(-15px) scale(0.97); /* scale reduz ou amplia a escala do elemento */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modalTela h2 {
+    color: #4a2c1d; /* Define a cor do texto */
+    margin-bottom: 20px; /* Margem externa inferior */
 }
 
 .modalTela .close {
-    align-self: flex-end;
-    /* Alinha o botão de fechar à direita */
+    /* Botão redondo fixo no canto do modal */
+    position: absolute; /* Posiciona o elemento livremente em relação ao pai relative */
+    top: 14px;
+    right: 14px; /* Distância a partir do lado direito */
+    align-self: auto; /* Alinhamento individual do item ignorando a regra do flex pai */
+    width: 28px;
+    height: 28px;
+    border-radius: 50%; /* 50% cria um círculo perfeito */
+    background-color: #f0f0f0;
+    border: none; /* Remove qualquer borda */
+    font-size: 20px; /* Define o tamanho da fonte */
+    line-height: 1; /* Altura da linha de texto (1 remove espaçamentos verticais extras) */
+    cursor: pointer; /* Transforma o cursor do mouse na mãozinha de clique */
+    transition: background-color 0.2s ease;
+}
+
+.modalTela .close:hover {
+    background-color: #e0e0e0;
+}
+
+/* Ações do modal de usuário logado (Minha conta, Meus Pedidos, Alterar senha, Sair) */
+.modal-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Cria espaçamento padronizado entre todos os itens filhos do flex */
+    width: 100%;
+}
+
+.modal-acoes a {
+    text-decoration: none; /* Remove o sublinhado padrão de links */
+    width: 100%;
+}
+
+.modal-acoes button,
+.form-login button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.modal-acoes button {
+    background-color: #f5eee9;
+    color: #4a2c1d;
+}
+
+.modal-acoes button:hover {
+    background-color: #ecdfd6;
+    transform: translateY(-1px);
+}
+
+.botao-sair {
+    background-color: #fdeeee !important; /* !important força esta regra a sobrescrever as outras */
+    color: #b3413d !important;
+}
+
+.botao-sair:hover {
+    background-color: #fadcdc !important;
+}
+
+/* Formulário de login dentro do modal */
+.form-login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: left;
+    gap: 4px;
+}
+
+.form-login label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    margin-top: 10px;
+}
+
+.form-login input {
+    padding: 10px 12px;
+    border: 1px solid #ddd; /* Cria borda sólida com espessura de 1px e cor clara */
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    outline: none; /* Remove a borda azul/preta padrão do navegador ao focar no campo */
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.form-login input:focus {
+    border-color: #a15c38; /* Altera a cor da borda quando o usuário clica para digitar */
+}
+
+.form-login button[type="submit"] {
+    margin-top: 18px;
+    background-color: #a15c38;
+    color: #fff;
+}
+
+.form-login button[type="submit"]:hover {
+    background-color: #8a4b2c;
+}
+
+.linkCadastro {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #555;
+}
+
+.linkCadastro a {
+    color: #a15c38;
+    text-decoration: none;
+}
+
+.linkCadastro a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+.erro {
+    color: #b3413d;
+    background-color: #fdeeee;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .menu {
     display: flex;
-    margin: auto;
+    margin: auto; /* Centraliza blocos horizontais dividindo o espaço restante */
     justify-content: center;
     /* Faz com que os itens do menu fiquem espaçados */
     align-items: center;
@@ -113,7 +265,6 @@ body {
     background-color: #f0f0f0;
     border-radius: 25px;
     /* Arredonda as bordas do div*/
-
 }
 
 .menu ul {
@@ -124,12 +275,10 @@ body {
     /* Remove os pontinhos da lista */
     padding: 0;
     /* Remove o padding da lista */
-
 }
 
 .menu ul li a {
     text-decoration: none;
-
 }
 
 .cadastro {
@@ -141,14 +290,12 @@ body {
     /* Faz com que os elementos fiquem em coluna */
     align-items: center;
     /* Centraliza o conteúdo verticalmente */
-
 }
 
 .cadastro form button {
     /* Faz com que o botão fique centralizado */
-    display: block;
+    display: block; /* Faz o elemento ocupar a linha toda como bloco */
     margin: 0 auto;
-
 }
 
 .cadastro form input {
@@ -160,7 +307,6 @@ body {
     /* Faz com que o padding seja relativo ao tamanho do container */
     margin-bottom: 5px;
     /* Faz com que o margin seja relativo ao tamanho do container */
-
 }
 
 .cadastroCompleto {
@@ -199,108 +345,262 @@ body {
 .encomenda {
     display: flex;
     flex-direction: column;
-    /* Faz com que os elementos fiquem em coluna */
-    margin-top: 20px;
     align-items: center;
-
+    margin: 40px auto 100px; /* (topo | lados automáticos | base) */
 }
 
-.encomenda form button {
-    /* Faz com que o botão fique centralizado */
-    display: block;
-    margin: 0 auto;
-
+.encomenda-cartao {
+    max-width: 480px;
 }
 
-.encomenda form input {
-    /* Faz com que os inputs fiquem centralizados */
+.encomenda-cartao h1 {
+    color: #4a2c1d;
+    margin-bottom: 8px;
+}
+
+.aviso-whatsapp {
+    color: #3a7d44;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.form-encomenda {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-encomenda label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    margin-top: 14px;
+}
+
+.form-encomenda input,
+.form-encomenda textarea {
     width: 100%;
     box-sizing: border-box;
-    /* Faz com que o tamanho do input seja relativo ao tamanho do container */
-    padding: 1px;
-    /* Faz com que o padding seja relativo ao tamanho do container */
-    margin-bottom: 5px;
-    /* Faz com que o margin seja relativo ao tamanho do container */
-
+    padding: 10px 12px;
+    margin-top: 4px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: border-color 0.2s ease;
 }
 
-.encomenda form textarea {
-    /* Faz com que os inputs fiquem centralizados */
-    width: 100%;
-    height: 100px;
-    /* Define a altura do textarea */
+.form-encomenda input:focus,
+.form-encomenda textarea:focus {
+    border-color: #a15c38;
+}
 
+.form-encomenda textarea {
+    height: 90px;
+    resize: vertical; /* Permite ao usuário redimensionar a caixa apenas para cima/baixo */
+}
+
+.nome-logado {
+    margin: 4px 0 0; /* (topo | lados | base) */
+}
+
+.valor-total {
+    display: flex;
+    justify-content: space-between; /* Espalha os itens jogando o primeiro na ponta esquerda e o último na direita */
+    align-items: center;
+    background-color: #f5eee9;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 18px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.valor-total strong {
+    color: #a15c38;
+    font-size: 1.1rem;
 }
 
 .produtos {
     display: flex;
-    padding-top: 10px;
-    padding-right: 5px;
+    gap: 14px;
+    flex-wrap: wrap; /* Permite que os itens quebrem para a linha de baixo se faltar espaço */
+    padding-top: 4px; /* Espaçamento interno superior */
+}
 
+.produto-opcao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f5eee9;
+    padding: 10px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 0 !important;
+}
+
+.produto-opcao input {
+    width: auto !important; /* Tamanho automático de acordo com o elemento */
+    margin: 0 !important;
+    accent-color: #a15c38; /* Altera a cor de marcação de checkboxes e radio buttons */
+}
+
+.campo-produto {
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 4px 16px 12px;
+    margin-top: 14px;
+}
+
+.msg-erro {
+    color: #b3413d;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+.msg-aviso {
+    color: #777;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+.encomenda-cartao .botao-cta {
+    margin-top: 24px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.contato-header {
+    text-align: center;
+    margin-top: 60px;
+    padding: 0 20px;
+}
+
+.contato-header h1 {
+    color: #4a2c1d;
+}
+
+.contato-header p {
+    color: #666;
+    margin-top: 6px;
 }
 
 .contato {
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 70px;
-    gap: 50px;
-    /* Espaçamento entre os elementos do contato */
     flex-wrap: wrap;
-    overflow: hidden;
-
+    gap: 30px;
+    margin: 40px auto 100px;
+    padding: 0 20px;
 }
 
-.contato div {
+.contato-card {
     display: flex;
-    margin-top: 2%;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    /* Faz com que os elementos fiquem em coluna */
+    align-items: center;
     gap: 10px;
-    /* Espaçamento entre os elementos do contato */
-    transition: transform 0.25s ease;
-
-}
-
-.contato div img:hover {
-    transform: translateY(-4px) scale(1.03);
-}
-
-.contato a {
+    background-color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    width: 220px;
+    box-sizing: border-box;
     text-decoration: none;
-    /* Remove a decoração do link */
-    color: inherit;
-    /* Mantém a cor do texto */
-    font-size: 25px;
-    /* Define o tamanho da fonte */
-
+    color: inherit; /* Herda a mesma cor de texto definida no elemento pai */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.contato #whatsapp-button,
-#instagram-button {
-    background: none;
-    /* Remove o fundo do botão */
-    border: none;
-    /* Remove a borda do botão */
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
+.contato-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
 }
 
-.contato #whatsapp-button img,
-.contato #instagram-button img {
+.contato-icone {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     display: flex;
-    margin: 0 auto;
-    /* Centraliza a imagem */
-    max-width: 70%;
-    height: auto;
-    /* Define a altura da imagem */
-    width: 200px;
-    /* Define a largura da imagem */
+    align-items: center;
+    justify-content: center;
+}
 
+.contato-icone img {
+    width: 42px;
+    height: 42px;
+}
+
+.contato-icone.whatsapp {
+    background-color: #25D366;
+}
+
+.contato-icone.instagram {
+    background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); /* Cria fundo com gradiente circular colorido */
+}
+
+.contato-card h2 {
+    font-size: 1.1rem;
+    color: #4a2c1d;
+    margin: 0;
+}
+
+.contato-card span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+@media (max-width: 500px) { /* Regra ativada apenas se a tela for de 500px ou menos */
+    .contato-card {
+        width: 80%;
+    }
+}
+
+/* Hero - seção de destaque logo abaixo do cabeçalho */
+.hero {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 20px 30px;
+}
+
+.hero-conteudo {
+    max-width: 600px;
+}
+
+.hero-conteudo h1 {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+    color: #4a2c1d;
+}
+
+.hero-conteudo p {
+    font-family: 'Poppins', sans-serif;
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.botao-cta {
+    display: inline-block;
+    background-color: #a15c38;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 14px 34px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.botao-cta:hover {
+    background-color: #8a4b2c;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
 }
 
 /* imagens */
@@ -308,7 +608,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    margin-bottom: 100px;
 }
 
 .trabalhos h2 {
@@ -316,41 +616,70 @@ body {
     font-weight: 600;
 }
 
-.galeria {
+.trabalhos-subtitulo {
+    color: #666;
+    margin-top: -8px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Carrossel: viewport corta o excesso, track desliza, imagem ativa em destaque e vizinhas semi-transparentes */
+.galeria-wrapper {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
     max-width: 90%;
     width: 1000px;
-    height: 450px;
-    background-color: #f0f0f0;
-    align-items: center;
-    border-radius: 100px;
-    justify-content: center;
-    gap: 10%;
-    flex-wrap: wrap;
-
+    margin: 0 auto;
 }
 
-.galeria img {
+.galeria-viewport {
+    overflow: hidden; /* Corta/esconde qualquer conteúdo que passe do limite desta caixa */
+    width: 100%;
+    max-width: 850px;
+}
+
+.galeria-track {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s ease;
+    will-change: transform; /* Otimiza a renderização no navegador avisando que a propriedade vai mudar */
+}
+
+.galeria-track img {
+    flex: 0 0 auto; /* Impede o item de encolher ou esticar no container flexível */
     width: 450px;
     height: 350px;
-    object-fit: cover;
+    object-fit: cover; /* Ajusta a imagem preenchendo o espaço sem distorcer (cortando excessos) */
     border-radius: 50px;
     box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.6);
-    transition: transform 0.25s ease;
+    cursor: pointer;
+
+    opacity: 0.35;
+    transform: scale(0.85);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.galeria img:hover {
-    transform: translateY(-4px) scale(1.03);
+.galeria-track img.ativa {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.galeria-track img:hover {
+    transform: scale(0.9);
+}
+
+.galeria-track img.ativa:hover {
+    transform: scale(1.03);
 }
 
 @media (max-width: 768px) {
-    .galeria {
-        max-width: 90%;
-        width: 1500px;
-        height: 350px;
+    .galeria-viewport {
+        max-width: 260px;
     }
 
-    .galeria img {
+    .galeria-track img {
         width: 220px;
         height: 220px;
     }
@@ -385,8 +714,8 @@ body {
 
 .imagem-full img {
     max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
+    max-height: 90%; /* Altura máxima para não ultrapassar a viewport */
+    object-fit: contain; /* Reduz a imagem para caber inteira sem cortar nada */
     border-radius: 10px;
 }
 
@@ -410,35 +739,87 @@ body {
 .cartao {
     display: flex;
     flex-direction: column;
-    margin-top: 3%;
+    align-items: center;
+    margin: 40px auto;
     background-color: #fff;
-    padding: 20px 30px;
-    border-radius: 10%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 450px;
+    padding: 36px 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+    max-width: 420px;
     width: 90%;
     text-align: center;
     box-sizing: border-box;
 }
 
 .cartaoTitulo {
-    background-color: rgb(220, 255, 255);
-    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.cartaoTitulo h1 {
+    color: #4a2c1d;
+    font-size: 1.8rem;
 }
 
 .cartaoInfo {
-    margin-top: 1%;
-    background-color: rgb(200, 248, 224);
-    border-radius: 10px;
-    height: auto;
-    width: auto;
-    padding: 10px;
+    width: 100%;
+    background-color: #f5eee9;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.cartaoInfo p {
+    margin: 8px 0;
+    font-size: 0.95rem;
 }
 
 .cartao input {
     margin-top: 10px;
     max-width: 50%;
     text-align: center;
+}
+
+/* Ações da conta (Alterar nome/senha, Excluir, Sair) - mesmo estilo do modal de usuário logado */
+.conta-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 22px;
+}
+
+.conta-acoes a {
+    text-decoration: none;
+    width: 100%;
+}
+
+.conta-acoes button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: #f5eee9;
+    color: #4a2c1d;
+    transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.conta-acoes button:hover {
+    background-color: #ecdfd6;
+    transform: translateY(-1px);
+}
+
+.botao-perigo {
+    background-color: #fdeeee !important;
+    color: #b3413d !important;
+}
+
+.botao-perigo:hover {
+    background-color: #fadcdc !important;
 }
 
 .linkSecundario {
@@ -478,9 +859,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 15px;
+    padding-bottom: 15px; /* Espaçamento interno inferior */
     margin-bottom: 15px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #eee; /* Linha de borda apenas na base */
 }
 
 .pedido-numero {
@@ -510,9 +891,9 @@ body {
 .pedido-observacao {
     margin-top: 15px;
     padding: 12px;
-    overflow-wrap: break-word;
+    overflow-wrap: break-word; /* Quebra palavras muito longas para não estourar o layout */
     background: #fafafa;
-    border-left: 3px solid #ddd;
+    border-left: 3px solid #ddd; /* Cria detalhe de linha vertical na borda esquerda */
     border-radius: 5px;
     color: #555;
 }
@@ -522,4 +903,45 @@ body {
     text-align: center;
     padding: 40px 20px;
     color: #777;
+}
+
+/* Botão flutuante do WhatsApp */
+.whatsapp-flutuante {
+    position: fixed;
+    bottom: 25px; /* Distância a partir da borda inferior da tela */
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: transform 0.2s ease;
+}
+
+.whatsapp-flutuante:hover {
+    transform: scale(1.08);
+}
+
+.whatsapp-flutuante svg {
+    width: 32px;
+    height: 32px;
+    fill: #fff; /* Altera a cor de preenchimento de ícones/vetores SVG */
+}
+
+@media (max-width: 768px) {
+    .whatsapp-flutuante {
+        width: 52px;
+        height: 52px;
+        bottom: 18px;
+        right: 18px;
+    }
+
+    .whatsapp-flutuante svg {
+        width: 28px;
+        height: 28px;
+    }
 }

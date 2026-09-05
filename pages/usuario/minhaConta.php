@@ -41,31 +41,28 @@ $cliente = $resultado->fetch_assoc();
     <div class="cadastro">
 
         <div class="cartao">
-            <div class="cartaoTitulo"><h1>Minha conta</h1></div>
-            
+            <div class="cartaoTitulo">
+                <h1>Minha conta</h1>
+            </div>
+
             <div class="cartaoInfo">
-            <p><strong>Nome:</strong> <?php echo htmlspecialchars($cliente['nome']); ?></p>
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($cliente['email']); ?></p>
-            <p>
-                <strong>Verificado:</strong>
-                <?php echo $cliente['email_verificado'] == 1 ? '✅' : '❌'; ?>
-            </p>
+                <p><strong>Nome:</strong> <?php echo htmlspecialchars($cliente['nome']); ?></p>
+                <p><strong>Email:</strong> <?php echo htmlspecialchars($cliente['email']); ?></p>
+                <p>
+                    <strong>Verificado:</strong>
+                    <?php echo $cliente['email_verificado'] == 1 ? '✅' : '❌'; ?>
+                </p>
+            </div>
 
-            <br>
+            <div class="conta-acoes">
+                <a href="alterarNome.php"><button type="button">Alterar nome</button></a>
+                <a href="alterarSenha.php"><button type="button">Alterar senha</button></a>
+                <a href="excluirConta.php"><button type="button" class="botao-perigo">Excluir minha conta</button></a>
 
-            <a href="alterarNome.php"><button>Alterar nome</button></a>
-            <br><br>
-
-            <a href="alterarSenha.php"><button>Alterar senha</button></a>
-            <br><br>
-
-            <a href="excluirConta.php"><button style="background-color:#c0392b; color:#fff;">Excluir minha conta</button></a>
-            <br><br>
-
-            <form action="../../actions/logout.php" method="POST">
-                <input type="hidden" name="csrf_token" value="<?php echo gerarTokenCSRF(); ?>">
-                <button type="submit">Sair</button>
-            </form>
+                <form action="../../actions/logout.php" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?php echo gerarTokenCSRF(); ?>">
+                    <button type="submit" class="botao-sair">Sair</button>
+                </form>
             </div>
         </div>
 

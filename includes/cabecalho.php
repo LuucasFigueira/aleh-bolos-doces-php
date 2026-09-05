@@ -39,19 +39,17 @@ $sucessoSenha = isset($_GET['sucesso']) && $_GET['sucesso'] === 'senha';
 
             <button class="close" id="fecharModal" onclick="fecharModal()">&times;</button>
 
-            <h2>Olá, Bem-vindo</h2>
-            <br>
-            <a href="<?php echo $base; ?>pages/usuario/minhaConta.php"><button type="button">Minha conta</button></a>
-            <br>
+            <h2>Olá, <?php echo htmlspecialchars($nomeUsuario); ?></h2>
 
-            <a href="<?php echo $base; ?>pages/usuario/pedidos.php"><button type="button">Meus Pedidos</button></a>
-            <br>
+            <div class="modal-acoes">
+                <a href="<?php echo $base; ?>pages/usuario/minhaConta.php"><button type="button">Minha conta</button></a>
+                <a href="<?php echo $base; ?>pages/usuario/pedidos.php"><button type="button">Meus Pedidos</button></a>
 
-            <form action="<?php echo $base; ?>actions/logout.php" method="POST">
-                <input type="hidden" name="csrf_token" value="<?php echo gerarTokenCSRF(); ?>">
-                <button type="submit">Sair</button>
-                <br>
-            </form>
+                <form action="<?php echo $base; ?>actions/logout.php" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?php echo gerarTokenCSRF(); ?>">
+                    <button type="submit" class="botao-sair">Sair</button>
+                </form>
+            </div>
         </div>
     </div>
 <?php else : ?>
@@ -71,34 +69,28 @@ $sucessoSenha = isset($_GET['sucesso']) && $_GET['sucesso'] === 'senha';
 
             <?php if ($erroLogin) : ?>
 
-                <p class="erro" style="color: red;"><strong>
-                        Email ou senha incorretos.
-                    </strong></p>
+                <p class="erro"><strong>Email ou senha incorretos.</strong></p>
 
             <?php elseif ($erroNaoVerificado) : ?>
 
-                <p class="erro" style="color: red;"><strong>
-                        E-mail não confirmado.
-                    </strong></p>
+                <p class="erro"><strong>E-mail não confirmado.</strong></p>
 
             <?php endif; ?>
 
-            <form action="<?php echo $base; ?>actions/login.php" method="POST">
+            <form action="<?php echo $base; ?>actions/login.php" method="POST" class="form-login">
                 <input type="hidden" name="csrf_token" value="<?php echo gerarTokenCSRF(); ?>">
+
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
-                <br><br>
 
                 <label for="senhaC">Senha:</label>
                 <input type="password" id="senhaC" name="senhaC" required>
-                <br>
 
                 <p class="linkSecundario"><a href="<?php echo $base; ?>pages/auth/esqueciSenha.php">Esqueceu a senha?</a></p>
 
                 <button type="submit">Entrar</button>
-                <br>
 
-                <p>Não tem uma conta? <a href="<?php echo $base; ?>pages/auth/cadastro.php">Cadastre-se</a></p>
+                <p class="linkCadastro">Não tem uma conta? <a href="<?php echo $base; ?>pages/auth/cadastro.php">Cadastre-se</a></p>
             </form>
         </div>
     </div>

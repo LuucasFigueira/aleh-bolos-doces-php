@@ -13,26 +13,27 @@
 
     <?php $base = "../../"; include "../../includes/cabecalho.php"; ?>
 
+    <div class="contato-header">
+        <h1>Fale com a gente</h1>
+        <p>Escolha o canal que preferir pra tirar dúvidas ou fazer sua encomenda</p>
+    </div>
+
     <div class="contato">
-        <div>
-            <button id="whatsapp-button" onclick="window.location.href='https://wa.me/5541998298487?text=Olá!%20Gostaria%20de%20fazer%20uma%20encomenda.'">
+        <a class="contato-card" href="https://wa.me/5541998298487?text=Olá!%20Gostaria%20de%20fazer%20uma%20encomenda.">
+            <div class="contato-icone whatsapp">
                 <img src="../../img-icones/whatsapp.png" alt="WhatsApp">
-            </button>
-            <a href="https://wa.me/5541998298487?text=Olá!%20Gostaria%20de%20fazer%20uma%20encomenda.">
-                <h2> 41 9 9829-8487 </h2>
-            </a>
-        </div>
+            </div>
+            <h2>41 9 9829-8487</h2>
+            <span>Chamar no WhatsApp</span>
+        </a>
 
-
-        <div>
-            <button id="instagram-button" onclick="window.location.href='https://www.instagram.com/alehbolosedoces/'">
+        <a class="contato-card" href="https://www.instagram.com/alehbolosedoces/" target="_blank">
+            <div class="contato-icone instagram">
                 <img src="../../img-icones/instagram.png" alt="Instagram">
-            </button>
-            <a href="https://www.instagram.com/alehbolosedoces/" target="_blank">
-                <h2> @alehbolosedoces </h2>
-            </a>
-        </div>
-
+            </div>
+            <h2>@alehbolosedoces</h2>
+            <span>Seguir no Instagram</span>
+        </a>
     </div>
 
     <script src="../../js/modal.js"></script>
